@@ -1,11 +1,15 @@
 /* eslint-disable */
-import './App.css';
-import { useState } from 'react';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
-  let [글제목, 글제목변경] = useState(['남자코트 추천', '강남 우동맛집', '파이썬독학']);
+  let [글제목, 글제목변경] = useState([
+    "남자코트 추천",
+    "강남 우동맛집",
+    "파이썬독학",
+  ]);
   let [따봉, 따봉변경] = useState(0);
-  let [modal, setModal] = useState('closed'); // 일반적으로 set~~
+  let [modal, setModal] = useState("closed"); // 일반적으로 set~~
 
   const 함수 = () => {
     따봉변경(따봉 + 1);
@@ -16,7 +20,7 @@ function App() {
       <div className="black-nav">
         <h4>ReactBlog</h4>
       </div>
-      <div className="list">
+      {/* <div className="list">
         <h4>
           {글제목[0]} <span onClick={함수}>👍</span> {따봉}
         </h4>
@@ -35,11 +39,27 @@ function App() {
           {글제목[2]}
         </h4>
         <p>2월 17일 발행</p>
-      </div>
+      </div> */}
+
+      {글제목.map(function (a, i) {
+        return (
+          <div className="list">
+            <h4
+              onClick={() => {
+                modal === "opened" ? setModal("closed") : setModal("opened");
+              }}
+            >
+              {글제목[i]}
+              <span onClick={함수}>👍</span> {따봉}
+            </h4>
+            <p>2월 17일 발행</p>
+          </div>
+        );
+      })}
 
       {
         // 조건식 ? 참일때 실행할 코드 : 거짓일때 실행할 코드
-        modal === 'opened' ? <Modal></Modal> : null
+        modal === "opened" ? <Modal></Modal> : null
       }
     </div>
   );
