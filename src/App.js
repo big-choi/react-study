@@ -5,6 +5,7 @@ import { useState } from 'react';
 function App() {
   let [글제목, 글제목변경] = useState(['남자코트 추천', '강남 우동맛집', '파이썬독학']);
   let [따봉, 따봉변경] = useState(0);
+  let [modal, setModal] = useState('closed'); // 일반적으로 set~~
 
   const 함수 = () => {
     따봉변경(따봉 + 1);
@@ -26,11 +27,20 @@ function App() {
         <p>2월 17일 발행</p>
       </div>
       <div className="list">
-        <h4>{글제목[2]}</h4>
+        <h4
+          onClick={() => {
+            modal === 'opened' ? setModal('closed') : setModal('opened');
+          }}
+        >
+          {글제목[2]}
+        </h4>
         <p>2월 17일 발행</p>
       </div>
 
-      <Modal></Modal>
+      {
+        // 조건식 ? 참일때 실행할 코드 : 거짓일때 실행할 코드
+        modal === 'opened' ? <Modal></Modal> : null
+      }
     </div>
   );
 }
@@ -42,8 +52,8 @@ const Modal = () => {
       <p>날짜</p>
       <p>상세내용</p>
     </div>
-  )
-}
+  );
+};
 
 /*
 컴포넌트 사용처
